@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1 Lecture 1: Higher Order and Arrow Functions</title>
+</head>
+
+<body>
+  <div id="root">
+    <ul class="vocab">
+      <li>Higher Order Function - a function that accepts another function as an argument, and executes it as a callback
+        within its own execution</li>
+      <li>Callback Function - a function that is defined and provided as its definition, in order to be called back on
+        at a later time. They are called <em>by another function</em></li>
+      <li>Anonymous Function - a function that is defined, but not declared and saved in memory as a reusable function.
+        Basically, a function without a name that is dealt with immediately.</li>
+      <li>Arrow Function - a function that defined through a special symbol (a fat arrow; <code>=></code>) that
+        functions like a normal function, but is syntactically different. It also differs in its context.</li>
+    </ul>
+    <h1>Higher Order Functions (and Arrow Functions)</h1>
+    <div class="warmup">
+      <h3>Warmup</h3>
+      <p>Let's write some for loops! Using the <code>cars</code> array in index.js, write the following loops:</p>
+      <ul>
+        <li>Loop through the array and print the <code>make</code> and <code>model</code> of each car.</li>
+        <li>Create a new array. Loop through the cars array and only push cars made after 2012 into the new array.</li>
+        <li>Loop through the array and find the first object with a <code>model</code> property of "Sierra"</li>
+      </ul>
+    </div>
+    <div>
+      <h3>What is a Higher Order Function???</h3>
+      <p>
+        A function can be considered <code>Higher Order</code> if it accepts a function as an argument,
+        and runs that function in its execution.
+      </p>
+    </div>
+    <div>
+      <h3>Higher Order Array Methods to Learn</h3>
+      <ul>
+        <li>Array.forEach()</li>
+        <li>Array.map()</li>
+        <li>Array.filter()</li>
+        <li>Array.find()</li>
+        <li>Array.some()</li>
+        <li>Array.every()</li>
+        <li>Array.reduce()</li>
+      </ul>
+    </div>
+    <ul id="carList">
+
+    </ul>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+
+</html>
