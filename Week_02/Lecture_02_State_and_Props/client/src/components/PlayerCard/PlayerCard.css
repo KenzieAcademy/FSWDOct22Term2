@@ -1,0 +1,20 @@
+.player-card {
+  border: 1px solid black;
+  border-radius: 15px;
+  max-width: 300px;
+  min-height: 400px;
+  max-height: 600px;
+  padding: 25px;
+}
+
+.player-pic {
+  width: 100%;
+}
+
+.about-section {
+  height: 150px;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: space-between;
+}
