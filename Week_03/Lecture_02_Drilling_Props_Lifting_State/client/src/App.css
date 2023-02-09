@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.row,
+.flex-between {
+  width: 100%;
+  display: flex;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.add-player {
+  width: 30%;
+}
+
+.team {
+  width: 70%;
+}
+
+a {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
