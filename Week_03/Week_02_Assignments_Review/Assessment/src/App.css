@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+}
+
+.App ol {
+  width: 20%;
+  margin: auto;
+  padding-left: 0;
+}
+
+.App ol li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.App ol li .list_buttons {
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+}
