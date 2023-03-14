@@ -1,0 +1,43 @@
+/* Your CSS Here */
+
+.list {
+  list-style: none;
+  padding: 0px;
+}
+
+.content-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 300px;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.rw {
+  background-color: #282c34;
+  color: #fff;
+}
+
+.content-header {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.content-row {
+  line-height: 2;
+  font-size: 1.6rem;
+}
+
+.col-headers {
+  font-size: 1.6rem;
+  color: #6d6d6d;
+  font-weight: 300;
+  margin-bottom: 0.6rem;
+}
+
+#basic-nav-dropdown {
+  color: #087afb;
+}
