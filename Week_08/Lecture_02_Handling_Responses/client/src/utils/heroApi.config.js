@@ -1,5 +1,6 @@
 // To configure axios, you need to import axios
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // Then, create a new instance. The instance can be
 // provided with a number of configuration options
@@ -18,6 +19,30 @@ heroApi.interceptors.request.use((request) => {
   return request;
 });
 
-heroApi.interceptors.response.use((response) => response.data);
+heroApi.interceptors.response.use(
+  (response) => response.data,
+  (error) => {
+    switch (error.response.status) {
+      case 400:
+        toast.error("Bad request, please try again.");
+        break;
+      case 404:
+        toast.error("That resource does not exist.");
+        break;
+      case 422:
+        toast.error(
+          "Invalid submission. Check the form for errors and try again."
+        );
+        break;
+      default:
+        toast.error(
+          "It's not you, it's me. Something went wrong, but it's not your fault."
+        );
+        break;
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export default heroApi;

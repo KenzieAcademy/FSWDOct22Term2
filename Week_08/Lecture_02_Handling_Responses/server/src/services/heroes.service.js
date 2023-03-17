@@ -33,12 +33,11 @@ export const removeHero = (id) => {
 
 export const updateHero = (id, updatedData) => {
   console.log(updatedData);
-  const { name, alias, powers } = updatedData;
+  const { name, alias } = updatedData;
   let hero = heroes.find((hero) => hero.id === Number(id));
 
   hero.name = name;
   hero.alias = alias;
-  hero.powers = powers;
 
   return hero;
 };
@@ -47,3 +46,15 @@ export const getAllHeroes = () => heroes;
 
 export const getHeroById = (id) =>
   heroes.find((hero) => hero.id === Number(id));
+
+export const addPowerToHero = (id, power) => {
+  const hero = heroes.find((hero) => hero.id === Number(id));
+
+  if (!hero) return null;
+
+  if (!hero.powers.some((pow) => pow.toLowerCase() === power.toLowerCase())) {
+    hero.powers.push(power);
+  }
+
+  return hero;
+};

@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import heroApi from "../utils/heroApi.config";
-import { Container } from "react-bootstrap";
+import { Button, Container, Modal } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const HeroesDashboard = () => {
   const [heroes, setHeroes] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [heroToDelete, setHeroToDelete] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
     // send an HTTP request to the server to retrieve all heroes
     heroApi.get("/heroes").then((data) => {
@@ -18,15 +23,37 @@ const HeroesDashboard = () => {
     });
   }, []);
 
-  const deleteHero = async (e, id) => {
+  const openDeleteModal = (e, hero) => {
     e.preventDefault();
-    // Send a DELETE request to delete the object from the "database"
-    const response = await heroApi.delete(
-      `/heroes/${id}` //,
-      // { data: { thisWouldBe: "req.body.thisWouldBe in express" } }
-    );
+    setShowModal(true);
+    setHeroToDelete(hero);
+  };
+  const closeDeleteModal = () => {
+    setShowModal(false);
+    setHeroToDelete();
+  };
 
-    console.log(response);
+  const deleteHero = async (id) => {
+    setIsSubmitting(true);
+
+    try {
+      // Send a DELETE request to delete the object from the "database"
+      const response = await heroApi.delete(
+        `/heroes/${id}` //,
+        // { data: { thisWouldBe: "req.body.thisWouldBe in express" } }
+      );
+
+      // Handle the modal
+      closeDeleteModal();
+      // Notify the user of a successful deletion
+      toast.success(`Successfully deleted ${heroToDelete.name}`);
+      // Update the DOM to reflect this deletion
+      setHeroes(heroes.filter((hero) => hero.id !== id));
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false);
+      closeDeleteModal();
+    }
   };
 
   return (
@@ -45,7 +72,7 @@ const HeroesDashboard = () => {
               <td>{hero.name}</td>
               <td>
                 <Link to={`/heroes/${hero.id}`}>Details</Link> |{" "}
-                <a href="#" onClick={(e) => deleteHero(e, hero.id)}>
+                <a href="#" onClick={(e) => openDeleteModal(e, hero)}>
                   Delete
                 </a>
               </td>
@@ -53,6 +80,22 @@ const HeroesDashboard = () => {
           ))}
         </tbody>
       </table>
+      <Modal show={showModal} onHide={closeDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            Are you sure you want to delete{" "}
+            {heroToDelete ? heroToDelete.name : ""}?
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeDeleteModal}>
+            Close
+          </Button>
+          <Button variant="danger" onClick={() => deleteHero(heroToDelete.id)}>
+            {isSubmitting ? <LoadingSpinner /> : "Confirm"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

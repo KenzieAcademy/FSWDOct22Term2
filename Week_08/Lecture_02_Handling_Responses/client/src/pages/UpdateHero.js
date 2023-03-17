@@ -2,24 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import heroApi from "../utils/heroApi.config";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../components/LoadingSpinner";
 
-const initialState = {
-  name: "",
-  alias: "",
-};
-
-const UpdateHero = () => {
-  const [heroName, setHeroName] = useState("");
-  const [data, setData] = useState(initialState);
+const UpdateHero = ({ hero, setHero, cancelEdit }) => {
+  const [data, setData] = useState(hero);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(data);
-    const response = await heroApi.put(`/heroes/${id}`, data);
-
-    console.log(response);
+    setIsSubmitting(true);
+    try {
+      const response = await heroApi.put(`/heroes/${id}`, data);
+      setHero(response);
+      cancelEdit();
+      toast.success(`Success! ${data.name} has been updated!`);
+    } catch (error) {
+      toast.error("Something went wrong, refresh the page and try again.");
+    }
+    setIsSubmitting(false);
   };
 
   const handleChange = (e) => {
@@ -29,16 +31,16 @@ const UpdateHero = () => {
     });
   };
 
-  useEffect(() => {
-    heroApi.get(`/heroes/${id}`).then((data) => {
-      setData(data);
-      setHeroName(data.name);
-    });
-  }, [id]);
+  // useEffect(() => {
+  //   heroApi.get(`/heroes/${id}`).then((data) => {
+  //     setData(data);
+  //     setHeroName(data.name);
+  //   });
+  // }, [id]);
 
   return (
     <Container>
-      <h2>Update {heroName}</h2>
+      <h2>Update {hero.name}</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-2">
           <Form.Label>Name</Form.Label>
@@ -58,7 +60,14 @@ const UpdateHero = () => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Button type="submit">Submit</Button>
+        <Form.Group>
+          <Button type="button" variant="secondary" onClick={cancelEdit}>
+            Cancel
+          </Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? <LoadingSpinner /> : "Submit"}
+          </Button>
+        </Form.Group>
       </Form>
     </Container>
   );
