@@ -1,0 +1,19 @@
+{
+  "name": "lecture_01_mongo_intro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm start --workspace=server",
+    "start": "concurrently --kill-others-on-fail \"npm run server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "server"
+  ],
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
