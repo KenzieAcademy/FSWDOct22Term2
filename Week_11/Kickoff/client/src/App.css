@@ -1,0 +1,20 @@
+#app-wrap {
+  padding: 0;
+  margin: 0;
+}
+
+.theme-bg-light {
+  background-color: white;
+}
+
+.theme-bg-dark {
+  background-color: rgb(129, 129, 129);
+}
+
+.card.bg-dark {
+  color: white;
+}
+
+.card.bg-light {
+  color: black;
+}
