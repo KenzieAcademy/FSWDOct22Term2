@@ -1,0 +1,17 @@
+.avatar-options {
+  max-width: 100%;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.selectable-avatar {
+  width: 80px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.selected {
+  border: 5px solid gold;
+  border-radius: 10px;
+  background-color: goldenrod;
+}
