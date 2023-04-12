@@ -1,0 +1,18 @@
+.spinner {
+  animation: spin 5s infinite linear;
+  background-color: none;
+  border: 5px solid black;
+  border-top-color: orange;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@keyframes spin {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
