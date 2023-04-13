@@ -51,6 +51,12 @@ const useTheme = () => {
 
   const clearLocalStorage = () => dispatch({ type: "CLEAR_LOCAL" });
 
+  useEffect(() => {
+    const savedItem = JSON.parse(localStorage.getItem("thisCart")) || false;
+
+    console.log(savedItem);
+  }, [dispatch]);
+
   return {
     theme: state.theme,
     setDarkMode,
